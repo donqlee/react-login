@@ -11,6 +11,18 @@ const Login = (props) => {
   const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
 
+  // useEffect(() => {
+  //   console.log('EFFECT RUNNING');
+
+  //   return () => {
+  //     console.log('EFFECT CLEANUP');
+  //   };
+  // }, [enteredPassword]) 
+  // 의존성이 없을때는 모든 컴포넌트 렌더링 주 후 실행
+  // 의존성을 빈배열로만 주면, 컴포넌트가 처음으로 마운트되고 렌더링 될때만 실행
+  // 의존성에 [enteredPassword] 넣으면, 이 state가 변경 될때만 실행
+  // return은  useEffect 전에 실행되고, 컴포넌트가 제거되면 실행
+
   useEffect(() => {
     const identifier = setTimeout(() => {
       console.log('Checking from validity!');
