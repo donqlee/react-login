@@ -45,31 +45,33 @@ const Login = (props) => {
   // 의존성에 [enteredPassword] 넣으면, 이 state가 변경 될때만 실행
   // return은  useEffect 전에 실행되고, 컴포넌트가 제거되면 실행
 
-  // useEffect(() => {
-  //   const identifier = setTimeout(() => {
-  //     console.log('Checking from validity!');
-  //     setFormIsValid(
-  //       enteredEmail.includes('@') && enteredPassword.trim().length > 6
-  //     );
-  //   }, 500);
+  const { isValid: emailIsValid } = emailState;
+  const { isValid: passwordIsVailid } = passwordState;
+  useEffect(() => {
+    const identifier = setTimeout(() => {
+      console.log('Checking from validity!');
+      setFormIsValid(
+        emailIsValid && passwordIsVailid
+      );
+    }, 500);
 
-  //   return () => {
-  //     console.log('CLEANUP');
-  //     clearTimeout(identifier);
-  //   }
+    return () => {
+      console.log('CLEANUP');
+      clearTimeout(identifier);
+    }
     
-  // }, [enteredEmail, enteredPassword])
+  }, [emailIsValid, passwordIsVailid])
 
   const emailChangeHandler = (event) => {
     dispatchEmail({type: 'USER_INPUT', val: event.target.value});
-    setFormIsValid(
-      event.target.value.includes('@') && passwordState.value.trim().length > 6);
+    // setFormIsValid(
+    //   event.target.value.includes('@') && passwordState.value.trim().length > 6);
   };
 
   const passwordChangeHandler = (event) => {
     dispatchPassword({type: 'USER_INPUT', val: event.target.value});
-    setFormIsValid(
-      emailState.value.includes('@') && event.target.value.trim().length > 6);
+    // setFormIsValid(
+    //   emailState.value.includes('@') && event.target.value.trim().length > 6);
   };
 
   const validateEmailHandler = () => {
